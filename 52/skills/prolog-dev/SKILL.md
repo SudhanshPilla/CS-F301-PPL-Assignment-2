@@ -1,30 +1,57 @@
----
-name: prolog-dev
-description: Implement and review this assignment's Prolog predicates in SWI-Prolog 9.x.
----
 
-# Prolog development instructions
+# Prolog Development Skill
 
-- Target SWI-Prolog 9.x.
-- Use lowercase predicate names, descriptive variables, and one clause per numbered puzzle clue.
-- Read predicates declaratively: each clause states a relationship; avoid side effects and global state.
-- Keep solution files to definitions, with no initialization directive or load-time output.
-- For P1, represent a row as `p(Name, Department, Language, Project)`, use quoted atoms exactly as the assignment specifies, and preserve the Alex, Ben, Carla, Dana order.
-- For counting, enumerate complete assignments with `findall/3`; apply only the clue numbers passed to the predicate.
-- Use only the permitted libraries (`lists`, `apply`, `yall`, `aggregate`). Do not use `assert/1`, `retract/1`, or global variables.
-- Run the P1 checks with `swipl -q -f tests/test_p1.pl -g run_p1_tests -t halt`; run the requested display with `swipl -q -f code/52_q1.pl -g main -t halt`.
+## Environment
+- Language: Prolog
+- Runtime: SWI-Prolog
+- Version required by assignment: SWI-Prolog 9.x
+- Current development environment: SWI-Prolog 11.0.0
 
-## Self-review checklist
+## Coding conventions
+- Use declarative Prolog predicates.
+- Prefer recursion, pattern matching, and backtracking.
+- Use meaningful predicate and variable names.
+- Keep predicates focused on one responsibility.
+- Avoid unnecessary cuts.
+- Do not use global state, assert, or retract.
+- Do not print output from assignment predicates unless explicitly required.
+- Do not include initialization directives or halt calls in submitted source files.
 
-- Does each attribute use every allowed value exactly once?
-- Does every clue predicate succeed exactly when its statement holds?
-- Does counting ignore clues outside `Active`?
-- Is the ninth clue independent of friend names and unique among solutions to clues 1–8?
-- Does `main/0` print exactly four required lines and does loading the file print nothing?
+## Testing
+- Test predicates directly from the SWI-Prolog command line.
+- Test normal cases, boundary cases, and failure cases.
+- Check exact output formats where required.
+- Use PlUnit for automated tests.
+- Run the complete test suite before committing.
 
-## Known AI failure modes
+## Arithmetic
+- Use `is/2` for arithmetic evaluation.
+- Use arithmetic comparisons such as `=:=`, `=\=`, and `>`.
+- Check division by zero before division.
+- For integer division, verify that the division is exact.
+- Account for negative intermediate values.
 
-- Confusing Prolog atom quoting and output formatting, especially `AI`, `Alex`, and `c++`.
-- Accidentally counting duplicate permutations or using only some clues in the base solution generator.
-- Treating a clue as a constraint on a named person when the wording refers to any friend.
-- Adding initialization or diagnostic output that breaks the grader's invocation.
+## Expression trees
+- Represent numbers as leaves.
+- Represent binary operations as nodes containing an operator and two subtrees.
+- Preserve the order of input numbers.
+- Evaluate and render trees separately.
+- Render parentheses according to operator precedence and associativity.
+
+## Common mistakes to avoid
+- Accidentally changing the order of input numbers.
+- Allowing empty expression sides.
+- Accepting non-exact division.
+- Forgetting to reject division by zero.
+- Producing duplicate equations.
+- Returning equations in an unspecified order.
+- Adding unnecessary spaces or parentheses to canonical strings.
+- Testing only successful cases.
+
+## AI-assisted development
+- Ask for one focused predicate or task at a time.
+- Do not ask an AI tool to generate the entire assignment solution.
+- Verify every generated predicate against the assignment specification.
+- Run tests independently and inspect failures.
+- Record prompts used during development in the appropriate prompt log.
+- Do not accept code without understanding its representation, recursion, and failure behavior.
