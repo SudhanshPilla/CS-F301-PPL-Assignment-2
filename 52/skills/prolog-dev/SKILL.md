@@ -1,3 +1,8 @@
+---
+name: prolog-dev
+description: Conventions, run commands, testing and known AI pitfalls for the Prolog work (P1, P2) in CS F301 Assignment 2.
+---
+
 # Prolog Development Skill
 
 ## Environment
