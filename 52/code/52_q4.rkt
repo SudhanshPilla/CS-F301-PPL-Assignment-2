@@ -19,14 +19,21 @@
   (or (null? e) (pair? e)))
 
 
-;; Process every sublist recursively (atoms unchanged); then put x in front
-;; if the ORIGINAL length of lst is less than n.
+;; Returns a function of one list: process sublists recursively, then put x
+;; in front if len-ok? holds for the ORIGINAL length of the list.
+(define (make-inserter x len-ok?)
+  (letrec ((walk (lambda (lst)
+                   (let ((processed (my-map (lambda (e) (if (is-list? e) (walk e) e))
+                                            lst)))
+                     (if (len-ok? (my-length lst))
+                         (cons x processed)
+                         processed)))))
+    walk))
+
+;; Insert x in front of every list whose length is less than n.
 (define (insert-if-short x lst n)
-  (let ((processed (my-map (lambda (e) (if (is-list? e) (insert-if-short x e n) e))
-                           lst)))
-    (if (< (my-length lst) n)
-        (cons x processed)
-        processed)))
+  ((make-inserter x (lambda (len) (< len n))) lst))
+
 
 ;; Read x, lst, n in that order from standard input and display the result.
 (define (print-insert-result)
