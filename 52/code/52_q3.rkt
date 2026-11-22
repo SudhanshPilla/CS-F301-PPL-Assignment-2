@@ -40,3 +40,22 @@
   (newline)
   (display (postorder-acc tree '()))
   (newline))
+
+
+;; Height of () is 0; height of a node is 1 + max of its subtrees' heights.
+(define (tree-height tree)
+  (if (null? tree)
+      0
+      (+ 1 (max (tree-height (cadr tree)) (tree-height (caddr tree))))))
+
+;; () has no leaves; a node with two empty subtrees is one leaf;
+;; otherwise the leaves are those of the left plus those of the right.
+(define (leaf-count tree)
+  (cond ((null? tree) 0)
+        ((and (null? (cadr tree)) (null? (caddr tree))) 1)
+        (else (+ (leaf-count (cadr tree)) (leaf-count (caddr tree))))))
+
+;; Display (height leaf-count) on one line.
+(define (print-height-and-leaves tree)
+  (display (list (tree-height tree) (leaf-count tree)))
+  (newline))
