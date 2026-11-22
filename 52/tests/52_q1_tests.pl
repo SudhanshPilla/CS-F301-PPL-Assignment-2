@@ -1,5 +1,5 @@
 % Lightweight tests for 52_q1.pl. Run from the 52 directory with:
-% swipl -q -f tests/test_p1.pl -g run_p1_tests -t halt
+% swipl -q -f tests/52_q1_tests.pl -g run_p1_tests -t halt
 :- consult('code/52_q1.pl').
 
 check(Goal) :-
