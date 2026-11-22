@@ -14,3 +14,29 @@
 (define (print-inorder tree)
   (display (inorder-acc tree '()))
   (newline))
+
+
+;; Preorder of () is acc. Preorder of a node is value, then preorder(left),
+;; then preorder(right), then acc.
+(define (preorder-acc tree acc)
+  (if (null? tree)
+      acc
+      (cons (car tree)
+            (preorder-acc (cadr tree) (preorder-acc (caddr tree) acc)))))
+
+;; Postorder of () is acc. Postorder of a node is postorder(left),
+;; then postorder(right), then value, then acc.
+(define (postorder-acc tree acc)
+  (if (null? tree)
+      acc
+      (postorder-acc (cadr tree)
+                     (postorder-acc (caddr tree) (cons (car tree) acc)))))
+
+;; Print inorder, preorder and postorder lists on three lines.
+(define (print-all-traversals tree)
+  (display (inorder-acc tree '()))
+  (newline)
+  (display (preorder-acc tree '()))
+  (newline)
+  (display (postorder-acc tree '()))
+  (newline))
